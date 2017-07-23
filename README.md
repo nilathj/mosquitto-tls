@@ -1,16 +1,17 @@
 # Setup subdomains and letsencrypt certificates
-This will let you setup Letsencrypt TLS certificates to communicate with your Home Assistant server running on the Raspberry PI, and a Mosquitto MQTT broker and OwnTracks andriod app running on your phone.
+
+These instructions will allow you to turn your Raspberry PI into a home-assistant enabled secure hub.  You will create your own subdomains with letsencrypt TLS certificates to communicate with your Home Assistant server running on the Raspberry PI, and a Mosquitto MQTT broker and OwnTracks andriod app running on your phone.
 
 Goto duckdns and register one subdomain for Home Assistant and another subdomain for Mosquitto broker and setup cronttabs to auto renew the subdomains and certificates.  Follow this to setup duckdns and to obtain letsencrypt certificates.
 
 https://home-assistant.io/blog/2015/12/13/setup-encryption-using-lets-encrypt/
 
 # Open up ports on your router
-Open up 443 (https) to map to internal port 8123 of the PI(port your Home Assistant is running on). This will allow you to hit https://homeassistantsubdomain.duckdns.org to bring up the Home Assistant login screen.
-Open up 80 to map to internal port 80 of the PI allow easy renewal of the subdomain and letsencrypt certificates using crontab jobs.
-Open up 8443 to map to internal port 8883(default port that mosquitto runs on in the Raspberry PI) of the PI to allow clients to communicate with your mosquitto broker using TLS which is running on port 8883 of the Raspberry PI.  Your mosquitto host will be mosquittosubdomain.duckdns.org with port 8443 (Note this is your external port that you have opened up in your router)
+Open up port 443 (https) to map to internal port 8123 of the PI(port your Home Assistant is running on). This will allow you to hit https://homeassistantsubdomain.duckdns.org to bring up the Home Assistant login screen.
+Open up port 80 to map to internal port 80 of the PI allow easy renewal of the subdomain and letsencrypt certificates using crontab jobs.
+Open up port 8443 to map to internal port 8883(default port that mosquitto runs on in the Raspberry PI) of the PI to allow clients to communicate with your mosquitto broker using TLS which is running on port 8883 of the Raspberry PI.  Your mosquitto host will be mosquittosubdomain.duckdns.org with port 8443 (Note this is your external port that you have opened up in your router)
 
-Open up 80 to allow easy renewal of subdomains and certificates.  
+Port 80 was opened to allow easy renewal of subdomains and certificates. Letsencrypt requires it open when you renew the certificates.  
 
 So now you will have homeassistantsubdomain.duckdns.org registered which will point to your Home Assistant on the Raspberry PI.  You will also have another mosquittosubdomain.duckdns.org registered which will point to your mosquitto server port on the Raspberry PI.
 
