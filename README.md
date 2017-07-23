@@ -8,12 +8,16 @@ https://home-assistant.io/blog/2015/12/13/setup-encryption-using-lets-encrypt/
 
 # Open up ports on your router
 Open up port 443 (https) to map to internal port 8123 of the PI(port your Home Assistant is running on). This will allow you to hit https://homeassistantsubdomain.duckdns.org to bring up the Home Assistant login screen.
-Open up port 80 to map to internal port 80 of the PI allow easy renewal of the subdomain and letsencrypt certificates using crontab jobs.
+
+
+Open up port 80 to map to internal port 80 of the PI allow easy renewal of the subdomain and letsencrypt certificates using crontab jobs.  Port 80 was opened to allow easy renewal of subdomains and certificates. Letsencrypt requires it open when you renew the certificates.  
+
+
 Open up port 8443 to map to internal port 8883(default port that mosquitto runs on in the Raspberry PI) of the PI to allow clients to communicate with your mosquitto broker using TLS which is running on port 8883 of the Raspberry PI.  Your mosquitto host will be mosquittosubdomain.duckdns.org with port 8443 (Note this is your external port that you have opened up in your router)
 
-Port 80 was opened to allow easy renewal of subdomains and certificates. Letsencrypt requires it open when you renew the certificates.  
 
 So now you will have homeassistantsubdomain.duckdns.org registered which will point to your Home Assistant on the Raspberry PI.  You will also have another mosquittosubdomain.duckdns.org registered which will point to your mosquitto server port on the Raspberry PI.
+
 
 In your Home Assistant configuration.yaml you should have the ssl certificates setup. These are the default paths when using letsencrypt:
 ```
@@ -106,6 +110,8 @@ $SYS/broker/bytes/sent 21133
 
 ## Setup OwnTracks on your Andriod phone
 Follow the Andriod section in http://owntracks.org/booklet/features/tlscert/
+
+
 I used the fullchain.pem and privkey.pem from my /etc/letsencrypt/live/mosquittosubdomain.duckdns.org/ directory.
 
 Generate the users key and certificate using the PKCS#12 container format.
@@ -114,7 +120,9 @@ openssl pkcs12 -export -in fullchain.pem -inkey privkey.pem -name "mymosquittoce
 ```
 NB: Make sure you specify a password for this file. You will need it later when you refer to it in your andriod owntracks app.
 
-Copy this file mymosquittocert.p12 to your andriod phone. Also copy /etc/ssl/certs/DST_Root_CA_X3.pem from your raspberry PI to your Andriod device.  
+Copy this file mymosquittocert.p12 to your andriod phone. Also copy /etc/ssl/certs/DST_Root_CA_X3.pem from your raspberry PI to your Andriod device.
+
+
 If you don't have the DST_Root_CA_X3.pem certificate, you can get it from here. https://mosquitto.org/2015/12/using-lets-encrypt-certificates-with-mosquitto/
 Look for a pastbin ref in the first comment.
 
@@ -137,6 +145,7 @@ Preferences->Connection
 Everything else is default.
 
 That should be it. Now you should see connections from your mobile in the mosquitto logs.
+
 
 When the android owntracks app connects to the mosquitto server, you will see something like this in the /var/log/mosquitto/mosquitto.log:
 ```
@@ -171,11 +180,12 @@ When the android owntracks app connects to the mosquitto server, you will see so
 ## Setup OwnTracks on your iOS device.
 I followed the iOS section in http://owntracks.org/booklet/features/tlscert/
 Unfortunately I coudln't get it working.
-I installed DST_Root_CA_X3.pem as the "TLS CA certificate", with my p12 file renamed as mymosquittocert.p12.otrp
+I installed DST_Root_CA_X3.pem as the "TLS CA certificate", with my p12 file renamed as mymosquittocert.p12.otrp.
 
 The error on my mosquitto log is:
+```
 1500788145: OpenSSL Error: error:140890B2:SSL routines:SSL3_GET_CLIENT_CERTIFICATE:no certificate returned
-
+```
 Please let me know if you know how to get this working.  
 
 ### Author
