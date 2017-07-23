@@ -6,6 +6,17 @@ Goto duckdns and register one subdomain for Home Assistant and another subdomain
 
 https://home-assistant.io/blog/2015/12/13/setup-encryption-using-lets-encrypt/
 
+
+I've added these two entries into my crontab on the PI to renew the subdomain and certificates.
+```
+sudo crontab -e
+```
+
+```
+*/5 * * * * ~/duckdns/duck.sh >/dev/null 2>&1
+40 11,23 * * * ~/certbot/certbot-auto renew --quiet --no-self-upgrade >> ~/certbot/certbot_renew.log
+```
+
 # Open up ports on your router
 Open up port 443 (https) to map to internal port 8123 of the PI(port your Home Assistant is running on). This will allow you to hit https://homeassistantsubdomain.duckdns.org to bring up the Home Assistant login screen.
 
