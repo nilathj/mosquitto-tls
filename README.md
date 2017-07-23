@@ -188,5 +188,9 @@ The error on my mosquitto log is:
 ```
 Please let me know if you know how to get this working.  
 
+## Configure home-assistant to use mosquitto MQTT broker
+WIP, not sure if I need to use the generated certificates?
+Need to do more reading... Pls let me know if you have any pointers.
+
 ### Author
 Nilath Jayamaha
