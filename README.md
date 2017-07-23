@@ -203,5 +203,10 @@ Please let me know if you know how to get this working.
 WIP, not sure if I need to use the generated certificates?
 Need to do more reading... Pls let me know if you have any pointers.
 
+## Create an iBeacon Transmitter with the Raspberry Pi
+You can also create an iBeacon Transmitter with your PI so that owntracks will detect when you come home reliably, rather than relying on GPS.
+
+http://www.wadewegner.com/2014/05/create-an-ibeacon-transmitter-with-the-raspberry-pi/
+
 ### Author
 Nilath Jayamaha
