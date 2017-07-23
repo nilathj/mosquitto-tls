@@ -15,7 +15,7 @@ Port 80 was opened to allow easy renewal of subdomains and certificates. Letsenc
 
 So now you will have homeassistantsubdomain.duckdns.org registered which will point to your Home Assistant on the Raspberry PI.  You will also have another mosquittosubdomain.duckdns.org registered which will point to your mosquitto server port on the Raspberry PI.
 
-In your Home Assistant configuration.yaml you should have(default paths):
+In your Home Assistant configuration.yaml you should have the ssl certificates setup. These are the default paths when using letsencrypt:
 ```
 http:
   api_password: YOUR_PASSWORD
@@ -40,12 +40,39 @@ sudo chown mosquitto *
 sudo chgrp mosquitto *
 ```
 
-## Edit the mosquitto.conf
+## Edit the /etc/mosquitto/conf.d/mosquitto.conf
 NB I have commented out tlsv1.  This will mean it will use any tls version. Refer https://mosquitto.org/man/mosquitto-conf-5.html for full config info.
 
 mosquitto.conf
 ```
-...
+listener 8883
+#tls_version tlsv1
+cafile /etc/ssl/certs/DST_Root_CA_X3.pem
+certfile /etc/letsencrypt/live/mosquittosubdomain.duckdns.org/fullchain.pem
+keyfile /etc/letsencrypt/live/mosquittosubdomain.duckdns.org/privkey.pem
+require_certificate true
+```
+
+The complete mosquitto.conf is:
+```
+allow_anonymous false
+autosave_interval 1800
+
+connection_messages true
+log_type error
+log_type warning
+log_type notice
+log_type information
+log_type all
+log_type debug
+log_timestamp true
+
+persistence true
+persistence_file mosquitto.db
+persistent_client_expiration 1m
+
+retained_persistence true
+
 listener 8883
 #tls_version tlsv1
 cafile /etc/ssl/certs/DST_Root_CA_X3.pem
