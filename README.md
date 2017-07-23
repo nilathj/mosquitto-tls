@@ -1,6 +1,6 @@
 # Setup subdomains and letsencrypt certificates
 
-These instructions will allow you to turn your Raspberry PI into a home-assistant enabled secure hub.  You will create your own subdomains with letsencrypt TLS certificates to communicate with your Home Assistant server running on the Raspberry PI, and a Mosquitto MQTT broker and OwnTracks andriod app running on your phone.
+These instructions will allow you to turn your Raspberry PI into a home-assistant enabled secure hub.  I have assumed that you have already installed home-assistant.  You will create your own subdomains with letsencrypt TLS certificates to communicate with your Home Assistant server running on the Raspberry PI, and a Mosquitto MQTT broker and OwnTracks Android app running on your phone.
 
 Goto duckdns and register one subdomain for Home Assistant and another subdomain for Mosquitto broker and setup cronttabs to auto renew the subdomains and certificates.  Follow this to setup duckdns and to obtain letsencrypt certificates.
 
@@ -108,8 +108,8 @@ $SYS/broker/bytes/received 21649
 $SYS/broker/bytes/sent 21133
 ```
 
-## Setup OwnTracks on your Andriod phone
-Follow the Andriod section in http://owntracks.org/booklet/features/tlscert/
+## Setup OwnTracks on your Android phone
+Follow the Android section in http://owntracks.org/booklet/features/tlscert/
 
 
 I used the fullchain.pem and privkey.pem from my /etc/letsencrypt/live/mosquittosubdomain.duckdns.org/ directory.
@@ -118,9 +118,9 @@ Generate the users key and certificate using the PKCS#12 container format.
 ```
 openssl pkcs12 -export -in fullchain.pem -inkey privkey.pem -name "mymosquittocert" -out mymosquittocert.p12
 ```
-NB: Make sure you specify a password for this file. You will need it later when you refer to it in your andriod owntracks app.
+NB: Make sure you specify a password for this file. You will need it later when you refer to it in your Android owntracks app.
 
-Copy this file mymosquittocert.p12 to your andriod phone. Also copy /etc/ssl/certs/DST_Root_CA_X3.pem from your raspberry PI to your Andriod device.
+Copy this file mymosquittocert.p12 to your Android phone. Also copy /etc/ssl/certs/DST_Root_CA_X3.pem from your raspberry PI to your Android device.
 
 
 If you don't have the DST_Root_CA_X3.pem certificate, you can get it from here. https://mosquitto.org/2015/12/using-lets-encrypt-certificates-with-mosquitto/
@@ -147,34 +147,34 @@ Everything else is default.
 That should be it. Now you should see connections from your mobile in the mosquitto logs.
 
 
-When the android owntracks app connects to the mosquitto server, you will see something like this in the /var/log/mosquitto/mosquitto.log:
+When the Android owntracks app connects to the mosquitto server, you will see something like this in the /var/log/mosquitto/mosquitto.log:
 ```
-1500804259: New client connected from xxx.xxx.xxx.xxx as Andriodphone (c0, k3600, u'Andriod').
-1500804259: Sending CONNACK to Andriodphone (0, 0)
-1500804259: Sending PUBLISH to Andriodphone (d0, q0, r0, m0, 'owntracks/Andriod/phone', ... (32 bytes))
-1500804259: Received PUBLISH from Andriodphone (d1, q1, r1, m81, 'owntracks/Andriod/phone', ... (126 bytes))
-1500804259: Sending PUBACK to Andriodphone (Mid: 81)
-1500804259: Sending PUBLISH to Andriodphone (d0, q1, r0, m81, 'owntracks/Andriod/phone', ... (126 bytes))
-1500804259: Received SUBSCRIBE from Andriodphone
+1500804259: New client connected from xxx.xxx.xxx.xxx as Androidphone (c0, k3600, u'Android').
+1500804259: Sending CONNACK to Androidphone (0, 0)
+1500804259: Sending PUBLISH to Androidphone (d0, q0, r0, m0, 'owntracks/Android/phone', ... (32 bytes))
+1500804259: Received PUBLISH from Androidphone (d1, q1, r1, m81, 'owntracks/Android/phone', ... (126 bytes))
+1500804259: Sending PUBACK to Androidphone (Mid: 81)
+1500804259: Sending PUBLISH to Androidphone (d0, q1, r0, m81, 'owntracks/Android/phone', ... (126 bytes))
+1500804259: Received SUBSCRIBE from Androidphone
 1500804259:     owntracks/+/+ (QoS 2)
-1500804259: Andriodphone 2 owntracks/+/+
+1500804259: Androidphone 2 owntracks/+/+
 1500804259:     owntracks/+/+/info (QoS 2)
-1500804259: Andriodphone 2 owntracks/+/+/info
-1500804259:     owntracks/Andriod/phone/cmd (QoS 2)
-1500804259: Andriodphone 2 owntracks/Andriod/phone/cmd
+1500804259: Androidphone 2 owntracks/+/+/info
+1500804259:     owntracks/Android/phone/cmd (QoS 2)
+1500804259: Androidphone 2 owntracks/Android/phone/cmd
 1500804259:     owntracks/+/+/event (QoS 2)
-1500804259: Andriodphone 2 owntracks/+/+/event
+1500804259: Androidphone 2 owntracks/+/+/event
 1500804259:     owntracks/+/+/waypoint (QoS 2)
-1500804259: Andriodphone 2 owntracks/+/+/waypoint
-1500804259: Sending SUBACK to Andriodphone
-1500804259: Sending PUBLISH to Andriodphone (d0, q1, r1, m82, 'owntracks/Android/phone', ... (126 bytes))
-1500804259: Received PUBLISH from Andriodphone (d0, q1, r1, m83, 'owntracks/Andriod/phone', ... (134 bytes))
-1500804259: Sending PUBACK to Andriodphone (Mid: 83)
-1500804259: Sending PUBLISH to Andriodphone (d0, q1, r0, m83, 'owntracks/Andriod/phone', ... (134 bytes))
-1500804259: Received PUBACK from Andriodphone (Mid: 81)
-1500804259: Received PUBACK from Andriodphone (Mid: 82)
-1500804259: Received PUBACK from Andriodphone (Mid: 83)
-1500804264: Received PUBLISH from Andriodphone (d0, q1, r1, m84, 'owntracks/Andriod/phone', ... (126 bytes))
+1500804259: Androidphone 2 owntracks/+/+/waypoint
+1500804259: Sending SUBACK to Androidphone
+1500804259: Sending PUBLISH to Androidphone (d0, q1, r1, m82, 'owntracks/Android/phone', ... (126 bytes))
+1500804259: Received PUBLISH from Androidphone (d0, q1, r1, m83, 'owntracks/Android/phone', ... (134 bytes))
+1500804259: Sending PUBACK to Androidphone (Mid: 83)
+1500804259: Sending PUBLISH to Androidphone (d0, q1, r0, m83, 'owntracks/Android/phone', ... (134 bytes))
+1500804259: Received PUBACK from Androidphone (Mid: 81)
+1500804259: Received PUBACK from Androidphone (Mid: 82)
+1500804259: Received PUBACK from Androidphone (Mid: 83)
+1500804264: Received PUBLISH from Androidphone (d0, q1, r1, m84, 'owntracks/Android/phone', ... (126 bytes))
 ```
 
 ## Setup OwnTracks on your iOS device.
