@@ -18,16 +18,16 @@ sudo crontab -e
 ```
 
 # Open up ports on your router
-Open up port 443 (https) to map to internal port 8123 of the PI(port your Home Assistant is running on). This will allow you to hit https://homeassistantsubdomain.duckdns.org to bring up the Home Assistant login screen.
+Open up port 443 (https) to map to internal port 8123 of the PI(port your Home Assistant is running on). This will allow you to hit **https://homeassistantsubdomain.duckdns.org** to bring up the Home Assistant login screen.
 
 
 Open up port 80 to map to internal port 80 of the PI allow easy renewal of the subdomain and letsencrypt certificates using crontab jobs.  Port 80 was opened to allow easy renewal of subdomains and certificates. Letsencrypt requires it open when you renew the certificates.  
 
 
-Open up port 8443 to map to internal port 8883(default port that mosquitto runs on in the Raspberry PI) of the PI to allow clients to communicate with your mosquitto broker using TLS which is running on port 8883 of the Raspberry PI.  Your mosquitto host will be mosquittosubdomain.duckdns.org with port 8443 (Note this is your external port that you have opened up in your router)
+Open up port 8443 to map to internal port 8883(default port that mosquitto runs on in the Raspberry PI) of the PI to allow clients to communicate with your mosquitto broker using TLS which is running on port 8883 of the Raspberry PI.  Your mosquitto host will be **mosquittosubdomain.duckdns.org** with port 8443 (Note this is your external port that you have opened up in your router)
 
 
-So now you will have homeassistantsubdomain.duckdns.org registered which will point to your Home Assistant on the Raspberry PI.  You will also have another mosquittosubdomain.duckdns.org registered which will point to your mosquitto server port on the Raspberry PI.
+So now you will have **homeassistantsubdomain.duckdns.org** registered which will point to your Home Assistant on the Raspberry PI.  You will also have another **mosquittosubdomain.duckdns.org** registered which will point to your mosquitto server port on the Raspberry PI.
 
 
 In your Home Assistant configuration.yaml you should have the ssl certificates setup. These are the default paths when using letsencrypt:
@@ -131,7 +131,7 @@ openssl pkcs12 -export -in fullchain.pem -inkey privkey.pem -name "mymosquittoce
 ```
 NB: Make sure you specify a password for this file. You will need it later when you refer to it in your Android owntracks app.
 
-Copy this file mymosquittocert.p12 to your Android phone. Also copy /etc/ssl/certs/DST_Root_CA_X3.pem from your raspberry PI to your Android device.
+Copy this file mymosquittocert.p12 to your Android phone. Also copy /etc/ssl/certs/DST_Root_CA_X3.pem from your raspberry PI to your Android device.  You don't need to install these certificates on your phone, just reference them in owntracks preferences.
 
 
 If you don't have the DST_Root_CA_X3.pem certificate, you can get it from here. https://mosquitto.org/2015/12/using-lets-encrypt-certificates-with-mosquitto/
