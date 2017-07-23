@@ -1,8 +1,8 @@
 # Setup subdomains and letsencrypt certificates
 
-These instructions will allow you to turn your Raspberry PI into a home-assistant enabled secure hub.  I have assumed that you have already installed home-assistant.  You will create your own subdomains with letsencrypt TLS certificates to communicate with your Home Assistant server running on the Raspberry PI, and a Mosquitto MQTT broker and OwnTracks Android app running on your phone.
+These instructions will allow you to turn your Raspberry PI into a home-assistant enabled secure hub.  I have assumed that you have already installed home-assistant.  You will create your own subdomains with letsencrypt TLS certificates to communicate with your Home Assistant server running on a Raspberry PI, with a Mosquitto MQTT broker and OwnTracks Android app running on your phone.
 
-Goto duckdns and register one subdomain for Home Assistant and another subdomain for Mosquitto broker and setup cronttabs to auto renew the subdomains and certificates.  Follow this to setup duckdns and to obtain letsencrypt certificates.
+Goto duckdns and register **one subdomain** for Home Assistant and **another subdomain** for Mosquitto broker and setup cronttabs to auto renew the subdomains and certificates.  Follow this to setup duckdns and to obtain letsencrypt certificates.
 
 https://home-assistant.io/blog/2015/12/13/setup-encryption-using-lets-encrypt/
 
@@ -18,6 +18,9 @@ sudo crontab -e
 ```
 
 # Open up ports on your router
+To create port forwards, add entries in your router under NAT Forwarding, Virtual Servers.
+
+
 Open up port 443 (https) to map to internal port 8123 of the PI(port your Home Assistant is running on). This will allow you to hit **https://homeassistantsubdomain.duckdns.org** to bring up the Home Assistant login screen.
 
 
@@ -41,7 +44,7 @@ http:
 # Setup Mosquitto MQTT broker on the Raspberry PI
 Follow http://owntracks.org/booklet/guide/broker/
 
-NB: Only follow the steps until "create a mosquitto user database".  DO NOT create certificates using owntracks/tools in their repo. We have already created our letsencrypt certificates.
+NB: Only follow the steps until "create a mosquitto user database".  **DO NOT** create certificates using owntracks/tools in their repo. We have already created our letsencrypt certificates.
 
 ## Stop mosquitto server
 ```
@@ -204,7 +207,7 @@ WIP, not sure if I need to use the generated certificates?
 Need to do more reading... Pls let me know if you have any pointers.
 
 ## Create an iBeacon Transmitter with the Raspberry Pi
-You can also create an iBeacon Transmitter with your PI so that owntracks will detect when you come home reliably, rather than relying on GPS.
+You can also create an iBeacon Transmitter with your PI so that owntracks will detect when you come home, reliably, rather than relying on GPS.
 
 http://www.wadewegner.com/2014/05/create-an-ibeacon-transmitter-with-the-raspberry-pi/
 
