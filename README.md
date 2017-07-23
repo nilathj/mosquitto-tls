@@ -91,6 +91,13 @@ That should be it. Now you should see connections from your mobile in the mosqui
 
 ## Setup OwnTracks on your iOS device.
 I followed the iOS section in http://owntracks.org/booklet/features/tlscert/
-Unfortunately I coudln't get this working. The error on my mosquitto log is:
+Unfortunately I coudln't get it working.
+I installed DST_Root_CA_X3.pem as the "TLS CA certificate", with my p12 file renamed as mymosquittocert.p12.otrp
+
+The error on my mosquitto log is:
 1500788145: OpenSSL Error: error:140890B2:SSL routines:SSL3_GET_CLIENT_CERTIFICATE:no certificate returned
+
 Please let me know if you know how to get this working.  
+
+### Author
+Nilath Jayamaha
