@@ -138,6 +138,35 @@ Everything else is default.
 
 That should be it. Now you should see connections from your mobile in the mosquitto logs.
 
+When the android owntracks app connects to the mosquitto server, you will see something like this in the /var/log/mosquitto/mosquitto.log:
+```
+1500804259: New client connected from xxx.xxx.xxx.xxx as Andriodphone (c0, k3600, u'Andriod').
+1500804259: Sending CONNACK to Andriodphone (0, 0)
+1500804259: Sending PUBLISH to Andriodphone (d0, q0, r0, m0, 'owntracks/Andriod/phone', ... (32 bytes))
+1500804259: Received PUBLISH from Andriodphone (d1, q1, r1, m81, 'owntracks/Andriod/phone', ... (126 bytes))
+1500804259: Sending PUBACK to Andriodphone (Mid: 81)
+1500804259: Sending PUBLISH to Andriodphone (d0, q1, r0, m81, 'owntracks/Andriod/phone', ... (126 bytes))
+1500804259: Received SUBSCRIBE from Andriodphone
+1500804259:     owntracks/+/+ (QoS 2)
+1500804259: Andriodphone 2 owntracks/+/+
+1500804259:     owntracks/+/+/info (QoS 2)
+1500804259: Andriodphone 2 owntracks/+/+/info
+1500804259:     owntracks/Andriod/phone/cmd (QoS 2)
+1500804259: Andriodphone 2 owntracks/Andriod/phone/cmd
+1500804259:     owntracks/+/+/event (QoS 2)
+1500804259: Andriodphone 2 owntracks/+/+/event
+1500804259:     owntracks/+/+/waypoint (QoS 2)
+1500804259: Andriodphone 2 owntracks/+/+/waypoint
+1500804259: Sending SUBACK to Andriodphone
+1500804259: Sending PUBLISH to Andriodphone (d0, q1, r1, m82, 'owntracks/Android/phone', ... (126 bytes))
+1500804259: Received PUBLISH from Andriodphone (d0, q1, r1, m83, 'owntracks/Andriod/phone', ... (134 bytes))
+1500804259: Sending PUBACK to Andriodphone (Mid: 83)
+1500804259: Sending PUBLISH to Andriodphone (d0, q1, r0, m83, 'owntracks/Andriod/phone', ... (134 bytes))
+1500804259: Received PUBACK from Andriodphone (Mid: 81)
+1500804259: Received PUBACK from Andriodphone (Mid: 82)
+1500804259: Received PUBACK from Andriodphone (Mid: 83)
+1500804264: Received PUBLISH from Andriodphone (d0, q1, r1, m84, 'owntracks/Andriod/phone', ... (126 bytes))
+```
 
 ## Setup OwnTracks on your iOS device.
 I followed the iOS section in http://owntracks.org/booklet/features/tlscert/
