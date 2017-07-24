@@ -7,9 +7,9 @@ Goto duckdns and register **one subdomain** for Home Assistant and **another sub
 https://home-assistant.io/blog/2015/12/13/setup-encryption-using-lets-encrypt/
 
 
-I've added these two entries into my crontab on the PI to renew the subdomain and certificates.
+I've added these two entries into my crontab on the PI to renew the subdomain and certificates. As the **pi** user, NOT root:
 ```
-sudo crontab -e
+crontab -e
 ```
 
 ```
