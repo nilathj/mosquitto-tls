@@ -23,7 +23,6 @@ To create port forwards, add entries in your router under NAT Forwarding, Virtua
 
 Open up port 443 (https) to map to internal port 8123 of the PI(port your Home Assistant is running on). This will allow you to hit **https://homeassistantsubdomain.duckdns.org** to bring up the Home Assistant login screen.
 
-
 Open up port 80 to map to internal port 80 of the PI allow easy renewal of the subdomain and letsencrypt certificates using crontab jobs.  Port 80 was opened to allow easy renewal of subdomains and certificates. Letsencrypt requires it open when you renew the certificates.  
 
 
@@ -90,6 +89,9 @@ persistence_file mosquitto.db
 persistent_client_expiration 1m
 
 retained_persistence true
+
+#listener 1883
+listener 1883 127.0.0.1
 
 listener 8883
 #tls_version tlsv1
@@ -203,8 +205,11 @@ The error on my mosquitto log is:
 Please let me know if you know how to get this working.  
 
 ## Configure home-assistant to use mosquitto MQTT broker
-WIP, not sure if I need to use the generated certificates?
-Need to do more reading... Pls let me know if you have any pointers.
+Edit the home-assistant configuration.yaml and add a mqtt section with a broker ip pointing to localhost.  This will use all the defaults which will use port 1883 on 127.0.0.1.  We have set this up on mosquitto config earlier. 
+```
+mqtt:
+  broker: 127.0.0.1
+```  
 
 ## Create an iBeacon Transmitter with the Raspberry Pi
 You can also create an iBeacon Transmitter with your PI so that owntracks will detect when you come home, reliably, rather than relying on GPS.
