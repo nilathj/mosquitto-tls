@@ -205,7 +205,9 @@ The error on my mosquitto log is:
 Please let me know if you know how to get this working.  
 
 ## Configure home-assistant to use mosquitto MQTT broker
-Edit the home-assistant configuration.yaml and add a mqtt section with a broker ip pointing to localhost.  This will use all the defaults which will use port 1883 on 127.0.0.1.  We have set this up on mosquitto config earlier. 
+Edit the home-assistant configuration.yaml and add a mqtt section with a broker ip pointing to localhost.  This will use all the defaults which will use port 1883 on 127.0.0.1.  We have set this up on mosquitto config earlier.
+Refer https://home-assistant.io/docs/mqtt/broker/#run-your-own for all the config options.
+
 ```
 mqtt:
   broker: 127.0.0.1
