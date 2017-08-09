@@ -217,12 +217,13 @@ Restart home-assistant:
 ```
 sudo systemctl restart home-assistant@homeassistant.service
 ```
-Verify that there are no errors in your HA log:
+Verify that there are no errors in your HA log.  You should not see any connection refused errors for mqtt.
 ```
 sudo systemctl status home-assistant@homeassistant.service -l
 ```
 Then once home-assistant has restarted, browse to your HA web page.  
 You should see the location status as either Home or Away, depending of where you are.
+
 ![HA location status](/home-assistant-location-tracking.png)
 
 
