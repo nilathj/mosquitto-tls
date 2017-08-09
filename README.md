@@ -213,6 +213,19 @@ mqtt:
   broker: 127.0.0.1
 ```  
 
+Restart home-assistant:
+```
+sudo systemctl restart home-assistant@homeassistant.service
+```
+Verify that there are no errors in your HA log:
+```
+sudo systemctl status home-assistant@homeassistant.service -l
+```
+Then once home-assistant has restarted, browse to your HA web page.  
+You should see the location status as either Home or Away, depending of where you are.
+![HA location status](/home-assistant-location-tracking.png)
+
+
 ## Create an iBeacon Transmitter with the Raspberry Pi
 You can also create an iBeacon Transmitter with your PI so that owntracks will detect when you come home, reliably, rather than relying on GPS.
 
