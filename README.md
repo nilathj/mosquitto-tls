@@ -1,4 +1,4 @@
-# Setup subdomains and letsencrypt certificates
+# Update, setup subdomains and letsencrypt certificates
 
 These instructions will allow you to turn your Raspberry PI with home-assistant into a secure location aware hub.  I have assumed that you have already installed home-assistant. Make sure you update it before you start:
 
