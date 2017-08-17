@@ -1,8 +1,12 @@
 # Setup subdomains and letsencrypt certificates
 
-These instructions will allow you to turn your Raspberry PI into a home-assistant enabled secure hub.  I have assumed that you have already installed home-assistant.  You will create your own subdomains with letsencrypt TLS certificates to communicate with your Home Assistant server running on a Raspberry PI, with a Mosquitto MQTT broker and OwnTracks Android app running on your phone.
+These instructions will allow you to turn your Raspberry PI with home-assistant into a secure location aware hub.  I have assumed that you have already installed home-assistant. Make sure you update it before you start:
 
-Goto duckdns and register **one subdomain** for Home Assistant and **another subdomain** for Mosquitto broker and setup cronttabs to auto renew the subdomains and certificates.  Follow this to setup duckdns and to obtain letsencrypt certificates.
+https://home-assistant.io/docs/installation/hassbian/upgrading/
+
+You will create your own subdomains with letsencrypt TLS certificates to communicate with your Home Assistant server running on a Raspberry PI, with a Mosquitto MQTT broker and OwnTracks Android app running on your phone.
+
+Goto duckdns and register **one homeassistantsubdomain** for Home Assistant and **another mosquittosubdomain** for Mosquitto broker and setup cronttabs to auto renew the subdomains and certificates.  Follow this to setup duckdns and to obtain letsencrypt certificates.
 
 https://home-assistant.io/blog/2015/12/13/setup-encryption-using-lets-encrypt/
 
