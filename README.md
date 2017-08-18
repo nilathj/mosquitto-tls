@@ -76,7 +76,8 @@ require_certificate true
 
 The complete mosquitto.conf is:
 ```
-allow_anonymous false
+#Allows connections without a username, since we are using TLS this is fine.
+allow_anonymous true
 autosave_interval 1800
 
 connection_messages true
@@ -126,6 +127,10 @@ $SYS/broker/bytes/received 21585
 $SYS/broker/bytes/sent 21058
 $SYS/broker/bytes/received 21649
 $SYS/broker/bytes/sent 21133
+```
+If you didn't specify allow_anonymous true in your mosquitto.conf you will get:
+```
+Connection Refused: not authorised.
 ```
 
 ## Setup OwnTracks on your Android phone
